@@ -3,13 +3,14 @@ package com.itheima.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
 /**
- * @description:
- * @time: 9/11/2022 16:20
+ * 配置连接池
  */
 public class JdbcConfig {
     @Value("${jdbc.driver}")
@@ -31,5 +32,11 @@ public class JdbcConfig {
         return dataSource;
     }
 
+    @Bean // 打开事务管理器
+    public PlatformTransactionManager transactionManager(DataSource dataSource){
+        DataSourceTransactionManager ds = new DataSourceTransactionManager();
+        ds.setDataSource(dataSource);
+        return ds;
+    }
 
 }
