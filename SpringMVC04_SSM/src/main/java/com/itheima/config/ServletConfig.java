@@ -5,7 +5,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import javax.servlet.Filter;
 
-
+/**
+ * 服务器解析mvc项目
+ */
 public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -22,10 +24,10 @@ public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInit
         return new String[]{"/"};
     }
 
-    @Override
+    /*@Override // 路径请求参数中 中文乱码解决
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         return new Filter[]{filter};
-    }
+    }*/
 }

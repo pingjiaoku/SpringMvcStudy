@@ -1,5 +1,8 @@
 package com.itheima.controller;
 
+/**
+ * 前后端交互格式类
+ */
 public class Result {
     private Integer code;
     private Object data;

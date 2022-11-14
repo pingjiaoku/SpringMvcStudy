@@ -29,4 +29,13 @@ public class BookServiceTest {
         List<Book> all = bookService.getAll();
         System.out.println(all);
     }
+
+    @Test
+    public void testSave(){
+        Book book = new Book();
+        book.setName("阿迪斯发第三方");
+        book.setType("json测试");
+        book.setDescription("嘎哈而哈哈听哈&*……（*&……（&13");
+        bookService.save(book);
+    }
 }

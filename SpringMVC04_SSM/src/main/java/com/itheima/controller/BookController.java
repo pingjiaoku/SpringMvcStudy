@@ -1,7 +1,9 @@
 package com.itheima.controller;
 
+import com.itheima.dao.BookDao;
 import com.itheima.domain.Book;
 import com.itheima.service.BookService;
+import org.apache.ibatis.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,27 +20,36 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public boolean save(@RequestBody Book book) {
-        return bookService.save(book);
+    public Result save(@RequestBody Book book) {
+        boolean flag = bookService.save(book);
+        return new Result(flag ? Code.SAVE_OK : Code.SAVE_ERR, flag);
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable Long id) {
-        return bookService.delete(id);
+    public Result delete(@PathVariable Long id) {
+        boolean flag = bookService.delete(id);
+        return new Result(flag ? Code.DELETE_OK : Code.DELETE_ERR, flag);
     }
 
     @PutMapping
-    public boolean update(@RequestBody Book book) {
-        return bookService.update(book);
+    public Result update(@RequestBody Book book) {
+        boolean flag = bookService.update(book);
+        return new Result(flag ? Code.UPDATE_OK : Code.UPDATE_ERR, flag);
     }
 
     @GetMapping
-    public List<Book> getAll() {
-        return bookService.getAll();
+    public Result getAll() {
+        Object data = bookService.getAll();
+        Integer code = data == null ? Code.GET_ERR : Code.GET_OK;
+        String msg = data == null ? "未能查询到数据" : "";
+        return new Result(code, data, msg);
     }
 
     @GetMapping("/{id}")
-    public Book getById(@PathVariable Long id) {
-        return bookService.getById(id);
+    public Result getById(@PathVariable Long id) {
+        Object data = bookService.getById(id);
+        Integer code = data == null ? Code.GET_ERR : Code.GET_OK;
+        String msg = data == null ? "未能查询到数据" : "";
+        return new Result(code, data, msg);
     }
 }

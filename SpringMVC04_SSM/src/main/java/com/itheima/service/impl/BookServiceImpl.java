@@ -1,7 +1,9 @@
 package com.itheima.service.impl;
 
+import com.itheima.controller.Code;
 import com.itheima.dao.BookDao;
 import com.itheima.domain.Book;
+import com.itheima.exception.BusinessException;
 import com.itheima.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +18,17 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean save(Book book) {
-        bookDao.save(book);
-        return true;
+        return bookDao.save(book) > 0;
     }
 
     @Override
     public boolean delete(Long id) {
-        bookDao.delete(id);
-        return true;
+        return bookDao.delete(id) > 0;
     }
 
     @Override
     public boolean update(Book book) {
-        bookDao.update(book);
-        return true;
+        return bookDao.update(book) > 0;
     }
 
     @Override

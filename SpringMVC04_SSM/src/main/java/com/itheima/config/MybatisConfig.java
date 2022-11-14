@@ -26,11 +26,5 @@ public class MybatisConfig {
         return mapperScannerConfigurer;
     }
 
-    @Bean
-    public PlatformTransactionManager platformTransactionManager(DataSource dataSource){
-        DataSourceTransactionManager ptm = new DataSourceTransactionManager();
-        ptm.setDataSource(dataSource);
-        return ptm;
-    }
 
 }
